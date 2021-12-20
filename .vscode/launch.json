@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker: Attach to NestJS",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "0.0.0.0",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/esoe-db-api",
+      "protocol": "inspector",
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch unit test",
+      "program": "${workspaceRoot}/node_modules/jest/node_modules/.bin/jest",
+      "args": ["--runInBand"]
+    },
+    {
+    "name": "Debug Jest Tests",
+    "type": "node",
+    "request": "launch",
+    "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand",
+        "--config ${workspaceRoot}/jest-e2e.js"
+    ],
+    "console": "integratedTerminal",
+    "internalConsoleOptions": "neverOpen",
+    "port": 9229
+    }
+  ]
+}
