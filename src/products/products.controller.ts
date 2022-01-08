@@ -33,13 +33,11 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  @EsoeCreatedResponse(Product)
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
   @Get()
-  @EsoeResponse([Product])
   findAll() {
     return this.productsService.findAll();
   }
@@ -50,7 +48,6 @@ export class ProductsController {
   }
 
   @Patch(':id')
-  @EsoeCreatedResponse(Product)
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productsService.update(+id, updateProductDto);
   }

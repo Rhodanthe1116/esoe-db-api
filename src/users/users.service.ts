@@ -26,6 +26,9 @@ export class UsersService {
   findOne(id: number) {
     return this.userRepo.findOne(id);
   }
+  findOneByEmail(email: string) {
+    return this.userRepo.findOne({ email });
+  }
 
   update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     return this.userRepo.save({ id, ...updateUserDto });

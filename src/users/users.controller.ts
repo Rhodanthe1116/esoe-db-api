@@ -1,3 +1,5 @@
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+
 import {
   Body,
   Controller,
@@ -6,7 +8,9 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto } from './dto/create-user.dto';
@@ -39,15 +43,16 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.usersService.remove(+id);
+  // }
 
-  @Post('signIn')
-  signIn(@Body() signInDto: SignInDto) {
-    return this.usersService.signIn(signInDto);
-  }
+  // @UseGuards(LocalAuthGuard)
+  // @Post('signIn')
+  // signIn(@Body() signInDto: SignInDto) {
+  //   return this.usersService.signIn(signInDto);
+  // }
 
   @Get('me')
   me(@Param('id') id: string) {

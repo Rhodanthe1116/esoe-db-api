@@ -23,6 +23,9 @@ export class User {
   email: string;
 
   @Column()
+  password: string;
+
+  @Column()
   phone: string;
 
   @OneToMany(() => Order, (order) => order.buyer)
