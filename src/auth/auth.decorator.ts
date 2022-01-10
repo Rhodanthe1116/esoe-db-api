@@ -1,7 +1,7 @@
 import { Role } from 'src/users/entities/user.entity';
 
 import { applyDecorators, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { Roles } from './roles.decorator';

@@ -1,5 +1,4 @@
 import { ProductOrder } from 'src/product-orders/entities/product-order.entity';
-import { Product } from 'src/products/entities/product.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -8,11 +7,8 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
-import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Order {

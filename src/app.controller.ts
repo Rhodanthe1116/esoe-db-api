@@ -1,4 +1,4 @@
-import { Role, UserType } from 'src/users/entities/user.entity';
+import { UserType } from 'src/users/entities/user.entity';
 
 import {
   Body,
@@ -8,12 +8,10 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse } from '@nestjs/swagger';
 
-import { AppService } from './app.service';
 import { Auth } from './auth/auth.decorator';
 import { AuthService } from './auth/auth.service';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { Public } from './decorators/public.decorator';
 import { SignInResponseDto } from './dto/sign-in-response.dto';
@@ -31,6 +29,7 @@ export class AppController {
   @Post('users/signIn')
   async login(
     @Request() req,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Body() signInDto: SignInDto,
   ): Promise<{
     id: number;

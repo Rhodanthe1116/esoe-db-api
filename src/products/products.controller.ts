@@ -1,11 +1,5 @@
 import { Auth } from 'src/auth/auth.decorator';
-import {
-  EsoeCreatedResponse,
-  EsoeResponse,
-} from 'src/decorators/esoe-response.decorator';
-import { Public } from 'src/decorators/public.decorator';
 import { EsoeApiResponseDto } from 'src/dto/esoe-api-response.dto';
-import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { UserType } from 'src/users/entities/user.entity';
 
 import {
@@ -16,17 +10,11 @@ import {
   Param,
   Patch,
   Post,
-  UseInterceptors,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiExtraModels, ApiTags } from '@nestjs/swagger';
+import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 
-import {
-  EsoeApiCreatedResponse,
-  EsoeApiResponse,
-} from '../decorators/esoe-api-response';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 
 @ApiTags('Product')
