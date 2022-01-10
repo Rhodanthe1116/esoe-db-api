@@ -18,6 +18,8 @@ npm install
 npm run start
 ```
 
+Then open <http://localhost:3000/>
+
 ## Description （以下為開發使用）
 
 本專案使用 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
