@@ -1,12 +1,11 @@
 import { Order } from 'src/orders/entities/order.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { ApiProperty } from '@nestjs/swagger';
-
 export enum UserType {
   買家 = '買家',
   賣家 = '賣家',
 }
+export type Role = UserType;
 
 @Entity()
 export class User {

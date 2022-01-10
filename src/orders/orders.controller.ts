@@ -1,3 +1,7 @@
+import { Auth } from 'src/auth/auth.decorator';
+import { User } from 'src/auth/user.decorator';
+import { User as UserEntity, UserType } from 'src/users/entities/user.entity';
+
 import {
   Body,
   Controller,
@@ -7,7 +11,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -18,16 +22,19 @@ import { OrdersService } from './orders.service';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
+  @Auth(UserType.買家, UserType.賣家)
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  create(@User() user: UserEntity, @Body() createOrderDto: CreateOrderDto) {
+    return this.ordersService.create(user.id, createOrderDto);
   }
 
+  @Auth(UserType.買家, UserType.賣家)
   @Get()
-  findAll() {
-    return this.ordersService.findAll();
+  findAll(@User() user: UserEntity) {
+    return this.ordersService.findAll(user);
   }
 
+  @Auth(UserType.買家, UserType.賣家)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(+id);

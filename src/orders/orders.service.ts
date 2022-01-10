@@ -1,3 +1,5 @@
+import { ProductOrder } from 'src/product-orders/entities/product-order.entity';
+import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
@@ -14,16 +16,31 @@ export class OrdersService {
     private orderRepo: Repository<Order>,
   ) {}
 
-  create(createOrderDto: CreateOrderDto): Promise<Order> {
-    return this.orderRepo.save(createOrderDto);
+  create(buyerId: number, createOrderDto: CreateOrderDto): Promise<Order> {
+    const productOrders = createOrderDto.productOrders.map((p) => {
+      const newPO = new ProductOrder();
+      newPO.productId = p.productId;
+      newPO.amount = p.amount;
+      return newPO;
+    });
+
+    // const newOrder = new Order();
+    // newOrder.productOrders = productOrders;
+    return this.orderRepo.save({ buyerId, ...createOrderDto, productOrders });
   }
 
-  findAll() {
-    return this.orderRepo.find();
+  findAll(user: User) {
+    return this.orderRepo.find({
+      where: { buyerId: user.id },
+      relations: ['buyer', 'productOrders', 'productOrders.product'],
+      order: { timestamp: 'DESC' },
+    });
   }
 
   findOne(id: number) {
-    return this.orderRepo.findOne(id);
+    return this.orderRepo.findOne(id, {
+      relations: ['buyer', 'productOrders', 'productOrders.product'],
+    });
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto): Promise<Order> {

@@ -10,6 +10,7 @@ import { typeOrmConfig } from './config';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
+import { ProductOrdersModule } from './product-orders/product-orders.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
     ProductsModule,
     OrdersModule,
     AuthModule,
+    ProductOrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
